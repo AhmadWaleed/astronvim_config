@@ -1,5 +1,5 @@
 return function(opt)
-    telescope = require("telescope")
+    local telescope = require("telescope")
     telescope.load_extension("file_browser")
     -- local fb_actions = require("telescope").extensions.file_browser.actions
     -- local telescope = require("telescope")
