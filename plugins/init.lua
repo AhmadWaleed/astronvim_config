@@ -1,43 +1,51 @@
--- Add plugins, the packer syntax without the "use"
 return {
-    {
-        "ray-x/go.nvim",
-        config = function()
-            require("go").setup()
-        end,
+  {
+    "ray-x/go.nvim",
+    dependencies = { -- optional packages
+      "ray-x/guihua.lua",
     },
-    {
-        "ThePrimeagen/harpoon",
-        config = function()
-            require("harpoon").setup({})
-        end
-    },
-    { "nvim-telescope/telescope-packer.nvim" },
-    { "nvim-telescope/telescope-file-browser.nvim" },
-    { "crispgm/telescope-heading.nvim" },
-    {
-        "ahmedkhalf/project.nvim",
-        config = function()
-            require("project_nvim").setup({
-                patterns = {
-                    ".git",
-                    "package.json",
-                    ".terraform",
-                    "go.mod",
-                    "requirements.yml",
-                    "pyrightconfig.json",
-                    "pyproject.toml",
-                    "Gemfile"
-                },
-                -- detection_methods = { "lsp", "pattern" },
-                detection_methods = { "pattern" },
-            })
-        end
-    },
+    config = function()
+      require("go").setup()
+    end,
+    event = { "CmdlineEnter" },
+    ft = { "go", 'gomod' },
+    build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+  },
+  {
+    "theHamsta/nvim-dap-virtual-text"
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    requires = {
+      "mfussenegger/nvim-dap",
+      "theHamsta/nvim-dap-virtual-text"
+    }
+  },
+  { "nvim-telescope/telescope-file-browser.nvim" },
+  { "crispgm/telescope-heading.nvim" },
+  {
+    "ahmedkhalf/project.nvim",
+    config = function()
+      require("project_nvim").setup({
+        patterns = {
+          ".git",
+          "package.json",
+          ".terraform",
+          "go.mod",
+          "requirements.yml",
+          "pyrightconfig.json",
+          "pyproject.toml",
+          "Gemfile"
+        },
+        -- detection_methods = { "lsp", "pattern" },
+        detection_methods = { "pattern" },
+      })
+    end
+  },
 
-    -- Plugins
-    { "catppuccin/nvim", as = "catppuccin" }
-    -- themes
+  -- Plugins
+  { "catppuccin/nvim", as = "catppuccin" }
+  -- themes
   -- ["EdenEast/nightfox.nvim"] = {
   --   config = function()
   --     require("nightfox").setup {

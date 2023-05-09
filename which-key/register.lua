@@ -32,7 +32,8 @@ return {
                         },
                         f = {
                                 e = { "<cmd>Telescope file_browser<cr>", "File browser" },
-                                F = { "<cmd>lua require('telescope.builtin').find_files { hidden = true, no_ignore = true, no_ignore_parent = true }<cr>",
+                                F = {
+                                        "<cmd>lua require('telescope.builtin').find_files { hidden = true, no_ignore = true, no_ignore_parent = true }<cr>",
                                         "Search for files" },
                                 t = { "<cmd>Telescope treesitter<cr>", "List symbols" },
                         },
@@ -52,7 +53,7 @@ return {
                                 a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "Add file" },
                                 u = {
                                         "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>",
-                                        "Clear Files",
+                                        "Toggle Quick Menu",
                                 },
                                 c = {
                                         "<cmd>lua require('harpoon.mark').clear_all()<cr>",

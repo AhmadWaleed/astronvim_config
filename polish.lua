@@ -21,7 +21,6 @@ return function()
   unmap("n", "<C-Left>")
   unmap("n", "<C-Right>")
   unmap("n", "<leader>h")
-  -- maps.n["<leader><leader>h"] = { "<cmd>nohlsearch<cr>", desc = "No Highlight" }
 
   -- Set resize on arrows key
   map("n", "<Up>", [[<cmd>lua require("smart-splits").resize_up()<CR>]], { desc = "Resize split up" })
@@ -33,8 +32,11 @@ return function()
   -- map("n", "<Left>", [[<cmd>vertical +2<CR>]], { desc = "Resize split up" })
   -- map("n", "<Right>", [[<cmd>vertical +2<CR>]], { desc = "Resize split up" })
 
+  map("n", "<leader><leader>h", "[[<cmd>nohlsearch<CR>]]", { desc = "No Highlight" })
+
   -- toggleterm
   map("t", "<esc>", [[<C-\><C-n>]], { desc = "Easily escape terminal" })
+  map("n", "<C-\\>", [[<cmd>ToggleTerm<cr>]], { desc = "Toggle terminal" })
 
 
   -- autocommands
@@ -46,17 +48,17 @@ return function()
     command = "source <afile> | PackerSync",
   })
 
-  vim.defer_fn(function()
-    vim.api.nvim_create_augroup("GoMisc", { clear = true })
-    vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-      group = "GoMisc",
-      pattern = "*.go",
-      callback = function()
-        vim.api.nvim_exec([[ :silent! lua require('go.format').gofmt() ]], false)
-        vim.api.nvim_exec([[ :silent! lua require('go.format').goimport() ]], false)
-      end,
-    })
-  end, 0)
+  -- vim.defer_fn(function()
+  --   vim.api.nvim_create_augroup("GoMisc", { clear = true })
+  --   vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  --     group = "GoMisc",
+  --     pattern = "*.go",
+  --     callback = function()
+  --       vim.api.nvim_exec([[ :silent! lua require('go.format').gofmt() ]], false)
+  --       vim.api.nvim_exec([[ :silent! lua require('go.format').goimport() ]], false)
+  --     end,
+  --   })
+  -- end, 0)
 
   -- luasnip.config.set_config({
   --   ext_opts = {
